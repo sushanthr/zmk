@@ -66,7 +66,7 @@
 };
 
 /* Declare the trackball */
-&spi2 {
+&pro_micro_spi {
     status = "disabled";
 
     miso-pin = <17>; // P0.17
@@ -75,6 +75,7 @@
     cs-gpios = <&gpio0 24 GPIO_ACTIVE_LOW>; // P0.24
 
     trackball: trackball@0 {
+        status = "disabled";
         compatible = "pixart,pmw3360";
         reg = <0>;
         label = "Pixart PMW3360";

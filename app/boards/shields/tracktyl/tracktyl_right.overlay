@@ -14,7 +14,7 @@
             ;
 };
 
-&spi2 {
+&pro_micro_spi {
     status = "okay";
 };
 
