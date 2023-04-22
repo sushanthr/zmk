@@ -22,4 +22,26 @@ config ZMK_BLE
 config ZMK_USB
 	default y
 
+# Role of the keyboard in split setup, default is master (i.e., central)
+## NOTE: this is a dedicated config option for nrfmacro board, so that all shields
+## using this board can share the some configuration. It's mainly used for controlling
+## which widget to show on different side of the keyboard
+choice
+  prompt "Role of the keyboard"
+  help
+    Specify the role of the keyboard
+
+config NICE_NANO_SHIELD_MASTER
+  bool "master side, in charge of communication with host"
+
+config NICE_NANO_SHIELD_SLAVE
+  bool "slave side, acting as a peripheral to master side"
+
+endchoice
+
+# add point device
+config NICE_NANO_POINTDEVICE
+  bool "add support for point device"
+  select SPI
+
 endif # BOARD_NICE_NANO || BOARD_NICE_NANO_V2
