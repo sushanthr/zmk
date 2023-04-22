@@ -23,7 +23,7 @@
 };
 
 /* Enable the right encoder and define its pins */
-&right_encoder {
+&encoder_right {
     status = "disabled";  // disable encoders until further hardware impl
     a-gpios = <&gpio1 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     b-gpios = <&gpio1 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
