@@ -65,8 +65,8 @@
 	};
 };
 
-/* Declare the trackball */
-&pro_micro_spi {
+/*
+&nice_nano_spi {
     status = "disabled";
 
     miso-pin = <17>; // P0.17
@@ -84,3 +84,4 @@
         scroll-layer = <5>;
     };
 };
+*/

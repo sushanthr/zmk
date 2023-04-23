@@ -14,7 +14,7 @@
             ;
 };
 
-&pro_micro_spi {
+&nice_nano_spi {
     status = "okay";
 };
 
