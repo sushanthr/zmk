@@ -52,36 +52,15 @@
   // define the two encoders
 	encoder_left: encoder_left {
 		compatible = "alps,ec11";
-    status = "disabled";
+        status = "disabled";
 		label = "LEFT_ENCODER";
 		resolution = <2>;
 	};
 
 	encoder_right: encoder_right {
 		compatible = "alps,ec11";
-    status = "disabled";
+        status = "disabled";
 		label = "RIGHT_ENCODER";
-    resolution = <2>;
+        resolution = <2>;
 	};
 };
-
-/*
-&nice_nano_spi {
-    status = "disabled";
-
-    miso-pin = <17>; // P0.17
-    mosi-pin = <20>; // P0.20
-    sck-pin = <22>; // P0.22
-    cs-gpios = <&gpio0 24 GPIO_ACTIVE_LOW>; // P0.24
-
-    trackball: trackball@0 {
-        status = "disabled";
-        compatible = "pixart,pmw3360";
-        reg = <0>;
-        label = "Pixart PMW3360";
-        irq-gpios = <&gpio1 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        spi-max-frequency = <2000000>;
-        scroll-layer = <5>;
-    };
-};
-*/
