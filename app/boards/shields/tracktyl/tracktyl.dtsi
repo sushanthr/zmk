@@ -64,3 +64,31 @@
         resolution = <2>;
 	};
 };
+
+&nice_nano_spi {
+    /*
+        sck -> P0.22 -> left 7
+        miso -> P0.17 -> left 5
+        cs -> P0.24 -> left 8
+        irq -> P1.0 -> left 9
+        mosi -> P0.20 -> left 6
+        gnd -> left 3, left 4, right 2
+        vdd -> right 4
+    */
+    compatible = "nordic,nrf-spim";
+    status = "disabled";
+    miso-pin = <17>; // P0.17
+    mosi-pin = <20>; // P0.20
+    sck-pin = <22>; // P0.22
+    cs-gpios = <&gpio0 24 GPIO_ACTIVE_LOW>; // P0.24
+
+    trackball: trackball@0 {
+        status = "disabled";
+        compatible = "pixart,pmw3360";
+        reg = <0>;
+        label = "Pixart PMW3360";
+        irq-gpios = <&gpio1 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        spi-max-frequency = <2000000>;
+        scroll-layer = <5>;
+    };
+};
