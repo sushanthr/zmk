@@ -78,7 +78,7 @@ static int send_keyboard_report() {
     case ZMK_ENDPOINT_USB: {
         int err = zmk_usb_hid_send_report((uint8_t *)keyboard_report, sizeof(*keyboard_report));
         if (err) {
-            LOG_ERR("FAILED TO SEND OVER USB: %d", err);
+            LOG_ERR("FAILED TO SEND OVER USB DUE TO KEYBOARD_REPORT: %d   ", err);
         }
         return err;
     }
@@ -108,7 +108,7 @@ static int send_consumer_report() {
     case ZMK_ENDPOINT_USB: {
         int err = zmk_usb_hid_send_report((uint8_t *)consumer_report, sizeof(*consumer_report));
         if (err) {
-            LOG_ERR("FAILED TO SEND OVER USB: %d", err);
+            LOG_ERR("FAILED TO SEND OVER USB DUE TO CONSUMER: %d   ", err);
         }
         return err;
     }
@@ -152,7 +152,7 @@ int zmk_endpoints_send_mouse_report() {
     case ZMK_ENDPOINT_USB: {
         int err = zmk_usb_hid_send_report((uint8_t *)mouse_report, sizeof(*mouse_report));
         if (err) {
-            LOG_ERR("FAILED TO SEND OVER USB: %d", err);
+            LOG_ERR("FAILED TO SEND OVER USB DUE TO MOUSE: %d   ", err);
         }
         return err;
     }

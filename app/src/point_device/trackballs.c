@@ -207,7 +207,7 @@ static void zmk_trackballs_init_item(const char *node, uint8_t i, uint8_t abs_i)
     } while (err == -EBUSY && count < 100);
 
     if (err) {
-      LOG_ERR("Cannot enable trigger");
+      LOG_ERR("Cannot enable trigger in app/src/point_device/trackball.c %d  ", err);
       return;
     }
 

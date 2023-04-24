@@ -209,7 +209,7 @@ static int trackball_init() {
 	} while (err == -EBUSY && count < 50);
 
 	if (err) {
-		LOG_ERR("Cannot enable trigger");
+		LOG_ERR("Cannot enable trigger in nice_nano trackball_new.c %d  ", err);
     return err;
 	}
 
@@ -241,7 +241,7 @@ SYS_INIT(trackball_init, APPLICATION, CONFIG_SENSOR_INIT_PRIORITY);
 /* the following code dynamically changes poll rate based on endpoint changing */
 // The code execution is driven by the zmk event system instead of zephyr interrupt routine
 int trackball_endpoint_listener(const zmk_event_t *eh) {
-  LOG_INF("endpoint changing...");
+  LOG_INF("endpoint changing... in trackball_new.c");
 
     // update polling parameters
     switch (zmk_endpoints_selected()) {
