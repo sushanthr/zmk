@@ -25,4 +25,4 @@
 	};
 };
 
-nice_nano_spi: &spi0 {};
+nice_nano_spi: &spi2 {};
