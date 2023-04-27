@@ -5,6 +5,27 @@
 #include <dt-bindings/zmk/mouse.h>
 
 / {
+    combos {
+        compatible = "zmk,combos";
+
+        combo_mb_lclick {
+            timeout-ms = <50>;
+            key-positions = <12 13>;
+            bindings = <&mkp LCLK>;
+        };
+
+         combo_mb_rclick {
+            timeout-ms = <50>;
+            key-positions = <22 23>;
+            bindings = <&mkp RCLK>;
+        };
+
+         combo_mb_mclick {
+            timeout-ms = <50>;
+            key-positions = <2 3>;
+            bindings = <&mkp MCLK>;
+        };
+    };
 
     behaviors {
         u_mt: u_mt {
@@ -71,7 +92,7 @@
        &kp NUMBER_1             &kp NUMBER_2               &kp NUMBER_3          &kp NUMBER_4   &kp NUMBER_5     &kp MINUS          &kp NUMBER_1                &kp NUMBER_2              &kp NUMBER_3              &kp NUMBER_0
                                                                 &kp ESC               &kp TAB  &kp BACKSPACE         &none                 &none
             >;
-            trackball-bindings = <&tsl>;
+            trackball-bindings = <&tkp LC(TAB) LC(LS(TAB)) LG(PG_UP) LG(PG_DN)>;
         };
 
         layer_nav {
@@ -81,7 +102,7 @@
 &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &kp LS(LC(Z))       &kp DEL    &kp DEL     &none      &none      &none
                           &none      &none          &none       &kp RET  &kp SPACE
             >;
-            trackball-bindings = <&tkp LC(TAB) LC(LS(TAB)) LG(PG_UP) LG(PG_DN)>;
+            trackball-bindings = <&tsl>;
         };
 
         layer_symb {
@@ -122,6 +143,6 @@
                                  &none       &none        &none         &none         &none
             >;
         };
-        trackball-bindings = <&tmv_x>;
+        trackball-bindings = <&tkp LC(TAB) LC(LS(TAB)) LG(PG_UP) LG(PG_DN)>;
     };
 };
