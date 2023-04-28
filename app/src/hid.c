@@ -339,8 +339,8 @@ void zmk_hid_mouse_scroll_set(int8_t x, int8_t y) {
 }
 
 void zmk_hid_mouse_scroll_update(int8_t x, int8_t y) {
-    mouse_report.body.scroll_x += x;
-    mouse_report.body.scroll_y += y;
+    mouse_report.body.scroll_x += x / 8;
+    mouse_report.body.scroll_y += y / 8 ;
     LOG_DBG("Mouse scroll updated to 0x%02X 0x%02X ", mouse_report.body.scroll_x,
             mouse_report.body.scroll_y);
 }

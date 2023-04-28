@@ -9,7 +9,7 @@
       mode = "move-mode";
       flavor = "default";
       scale_mode = "dividor";
-      scale_factor = <2>;
+      scale_factor = <3>;
 		};
 	};
 
@@ -21,7 +21,7 @@
       mode = "move-mode";
       flavor = "default";
       scale_mode = "dividor";
-      scale_factor = <4>;
+      scale_factor = <5>;
 		};
 	};
 
@@ -70,7 +70,7 @@
       mode = "scroll-mode";
       flavor = "default";
       scale_mode = "dividor";
-      scale_factor = <10>;
+      scale_factor = <5>;
 		};
 	};
 
@@ -82,10 +82,21 @@
       mode = "scroll-mode";
       flavor = "default";
       scale_mode = "dividor";
-      scale_factor = <1>;
+      scale_factor = <50>;
 		};
 	};
 
+	behaviors {
+		/omit-if-no-ref/ tsl_coarse: behavior_trackball_scroll_coarse {
+			compatible = "zmk,behavior-point-device-incremental";
+			label = "TRACKBALL_SCROLL_COARSE";
+			#trackball-binding-cells = <0>;
+      mode = "scroll-mode";
+      flavor = "default";
+      scale_mode = "dividor";
+      scale_factor = <5>;
+		};
+	};
   /* trackball key press */
 	behaviors {
 		/omit-if-no-ref/ tkp: behavior_trackball_key_press {
