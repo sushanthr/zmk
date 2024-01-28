@@ -18,7 +18,6 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static int on_sensor_binding_triggered(struct zmk_behavior_binding *binding,
                                        const struct sensor_value value, int64_t timestamp) {
-{
         LOG_DBG("Sensor value %d", value.val1);
 	zmk_hid_mouse_scroll_update(0, value.val1);
 	zmk_endpoints_send_mouse_report();
