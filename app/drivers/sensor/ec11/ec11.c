@@ -65,7 +65,8 @@ static int ec11_sample_fetch(const struct device *dev, enum sensor_channel chan)
     drv_data->delta = delta;
     drv_data->pulses %= drv_cfg->resolution;
 
-    return 0;
+    // If the delta is 0 return sample fetch failure, to avoid unnecessary bluetooth transmit.
+    return delta == 0 ? 1 : 0;
 }
 
 static int ec11_channel_get(const struct device *dev, enum sensor_channel chan,
