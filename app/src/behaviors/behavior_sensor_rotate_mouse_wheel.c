@@ -12,7 +12,7 @@
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 #include <drivers/sensor.h>
-#include <app/hid_mouse.h>
+#include <zmk/hid.h>
 
 #if DT_HAS_COMPAT_STATUS_OKAY(DT_DRV_COMPAT)
 
@@ -41,7 +41,7 @@ static int on_sensor_binding_triggered(struct zmk_behavior_binding *binding,
 		return -ENOTSUP;
 	}
 
-	return hid_mouse_wheel_report(direction);
+	return zmk_hid_mouse_scroll_update(0, value.val1);
 }
 
 static const struct behavior_driver_api behavior_sensor_rotate_mouse_wheel_driver_api = {
