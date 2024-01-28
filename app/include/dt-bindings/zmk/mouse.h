@@ -53,3 +53,6 @@
 #define SCROLL_DOWN SCROLL_VERT(-10)
 #define SCROLL_LEFT SCROLL_HOR(-10)
 #define SCROLL_RIGHT SCROLL_HOR(10)
+
+#define MW_UP(n) (0xFF - n)
+#define MW_DN(n) (n)
