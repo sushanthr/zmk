@@ -11,7 +11,7 @@
 #include "pmw3360.h"
 
 #include <logging/log.h>
-LOG_MODULE_REGISTER(pmw3360, CONFIG_PMW3360_LOG_LEVEL);
+LOG_MODULE_REGISTER(pmw3360, CONFIG_SENSOR_LOG_LEVEL);
 
 /* Timings defined by spec (in us) */
 #define T_NCS_SCLK 1                    /* 120 ns (rounded to 1us?)*/
