@@ -19,27 +19,6 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 static int on_sensor_binding_triggered(struct zmk_behavior_binding *binding,
                                        const struct sensor_value value, int64_t timestamp) {
 {
-	struct sensor_value value;
-	int err;
-	int direction;
-
-	err = sensor_channel_get(sensor, SENSOR_CHAN_ROTATION, &value);
-
-	if (err) {
-		LOG_WRN("Failed to ge sensor rotation value: %d", err);
-		return err;
-	}
-
-	switch (value.val1) {
-	case 1:
-		direction = binding->param1;
-		break;
-	case -1:
-		direction = binding->param2;
-		break;
-	default:
-		return -ENOTSUP;
-	}
         LOG_DBG("Sensor value %d", value.val1);
 	return zmk_hid_mouse_scroll_update(0, value.val1);
 }
