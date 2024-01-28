@@ -40,7 +40,7 @@ static int on_sensor_binding_triggered(struct zmk_behavior_binding *binding,
 	default:
 		return -ENOTSUP;
 	}
-
+        LOG_DBG("Sensor value %d", value.val1);
 	return zmk_hid_mouse_scroll_update(0, value.val1);
 }
 
