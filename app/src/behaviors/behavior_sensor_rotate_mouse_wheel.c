@@ -17,8 +17,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #if DT_HAS_COMPAT_STATUS_OKAY(DT_DRV_COMPAT)
 
 static int on_sensor_binding_triggered(struct zmk_behavior_binding *binding,
-				       const struct device *sensor,
-				       struct zmk_behavior_binding_event event)
+                                       const struct sensor_value value, int64_t timestamp) {
 {
 	struct sensor_value value;
 	int err;
