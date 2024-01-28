@@ -21,6 +21,7 @@ static int on_sensor_binding_triggered(struct zmk_behavior_binding *binding,
 {
         LOG_DBG("Sensor value %d", value.val1);
 	zmk_hid_mouse_scroll_update(0, value.val1);
+	zmk_endpoints_send_mouse_report();
 	return 0;
 }
 
