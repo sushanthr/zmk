@@ -20,7 +20,8 @@ static int on_sensor_binding_triggered(struct zmk_behavior_binding *binding,
                                        const struct sensor_value value, int64_t timestamp) {
 {
         LOG_DBG("Sensor value %d", value.val1);
-	return zmk_hid_mouse_scroll_update(0, value.val1);
+	zmk_hid_mouse_scroll_update(0, value.val1);
+	return 0;
 }
 
 static const struct behavior_driver_api behavior_sensor_rotate_mouse_wheel_driver_api = {
