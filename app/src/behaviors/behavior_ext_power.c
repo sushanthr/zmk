@@ -64,7 +64,11 @@ static int on_keymap_binding_released(struct zmk_behavior_binding *binding,
     return ZMK_BEHAVIOR_OPAQUE;
 }
 
-static int behavior_ext_power_init(const struct device *dev) { return 0; };
+static int behavior_ext_power_init(const struct device *dev) { 
+  const struct device *ext_power = device_get_binding("EXT_POWER");
+  ext_power_enable(ext_power);
+  return 0; 
+};
 
 static const struct behavior_driver_api behavior_ext_power_driver_api = {
     .binding_convert_central_state_dependent_params =
