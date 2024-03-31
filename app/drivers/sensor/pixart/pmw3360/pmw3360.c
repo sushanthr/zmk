@@ -658,6 +658,13 @@ static void trigger_handler(struct k_work *work) {
         uint8_t product_id;
         err = reg_read(dev, PMW3360_REG_PRODUCT_ID, &product_id);
         LOG_ERR("Reading back the product id: 0x%x   ", product_id);
+        if (product_id != 0)
+        {
+            // The chip has power now.
+            data->async_init_step = 0;
+            data->ready = true
+            k_work_schedule(&data->init_work, K_MSEC(async_init_delay[data->async_init_step]));
+        }
     }
 
     // 2. the second lock period is used to resume the interrupt line
