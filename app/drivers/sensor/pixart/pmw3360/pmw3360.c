@@ -642,6 +642,22 @@ static void trigger_handler(struct k_work *work) {
 
     handler(dev, data->trigger);
 
+  
+    /* Read the SROM_ID register to verify the firmware ID before any
+     * other register reads or writes
+     */
+    uint8_t fw_id;
+    err = reg_read(dev, PMW3360_REG_SROM_ID, &fw_id);
+    if (err) {
+        LOG_ERR("Cannot obtain firmware id");
+        return;
+    }
+    LOG_DBG("Optical chip firmware ID: 0x%x  ", fw_id);
+    if (fw_id != PMW3360_FIRMWARE_ID) {
+        LOG_ERR("Chip is not running from SROM!, got fw_id as 0x%x, the expected fw_id is 0x%x   ", fw_id, PMW3360_FIRMWARE_ID);
+        return;
+    }
+
     // 2. the second lock period is used to resume the interrupt line
     // if data_ready_handler is non-NULL, otherwise keep it inactive
     key = k_spin_lock(&data->lock);
