@@ -655,6 +655,9 @@ static void trigger_handler(struct k_work *work) {
     LOG_DBG("Optical chip firmware ID: 0x%x  ", fw_id);
     if (fw_id != PMW3360_FIRMWARE_ID && data->async_init_step == ASYNC_INIT_STEP_COUNT) {
         LOG_ERR("Chip is not running from SROM anymore !, got fw_id as 0x%x, the expected fw_id is 0x%x   ", fw_id, PMW3360_FIRMWARE_ID);
+        uint8_t product_id;
+        err = reg_read(dev, PMW3360_REG_PRODUCT_ID, &product_id);
+        LOG_ERR("Reading back the product id: 0x%x   ", product_id);
     }
 
     // 2. the second lock period is used to resume the interrupt line
