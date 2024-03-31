@@ -656,7 +656,7 @@ static void trigger_handler(struct k_work *work) {
     if (fw_id != PMW3360_FIRMWARE_ID && data->async_init_step == ASYNC_INIT_STEP_COUNT) {
         LOG_ERR("Chip is not running from SROM anymore !, got fw_id as 0x%x, the expected fw_id is 0x%x   ", fw_id, PMW3360_FIRMWARE_ID);
         data->async_init_step = 0;
-        k_work_init_delayable(&data->init_work, pmw3360_async_init);
+        data->ready = false;
         k_work_schedule(&data->init_work, K_MSEC(async_init_delay[data->async_init_step]));
         return;
     }
