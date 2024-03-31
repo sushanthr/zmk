@@ -662,7 +662,7 @@ static void trigger_handler(struct k_work *work) {
         {
             // The chip has power now.
             data->async_init_step = 0;
-            data->ready = true
+            data->ready = true;
             k_work_schedule(&data->init_work, K_MSEC(async_init_delay[data->async_init_step]));
         }
     }
