@@ -217,8 +217,9 @@ static int extpower_event_listener(const zmk_event_t *eh) {
     if (as_zmk_activity_state_changed(eh)) {
         if (zmk_activity_get_state() == ZMK_ACTIVITY_SLEEP)
         {
-           LOG_WRN("Acitivity Action Sleep ");
-           ext_power_generic_disable(dev);
+           LOG_WRN("Activity Action Sleep ");
+           const struct device *ext_power = device_get_binding(DT_INST_LABEL(0));
+           ext_power_generic_disable(ext_power);
         }
     }
     return 0;
