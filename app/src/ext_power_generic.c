@@ -214,16 +214,14 @@ static const struct ext_power_api api = {.enable = ext_power_generic_enable,
 // Special Power Adds
 static int extpower_event_listener(const zmk_event_t *eh) {
     LOG_DBG("extpower  %s", eh->event->name);
-#if IS_ENABLED(CONFIG_ZMK_BACKLIGHT_AUTO_OFF_IDLE)
     if (as_zmk_activity_state_changed(eh)) {
         if (zmk_activity_get_state() == ZMK_ACTIVITY_SLEEP)
         {
            LOG_WRN("Acitivity Action Sleep ");
+           ext_power_generic_disable(dev);
         }
     }
-#endif
-
-    return -ENOTSUP;
+    return 0;
 }
 
 ZMK_LISTENER(extpower, extpower_event_listener);
