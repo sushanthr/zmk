@@ -68,12 +68,16 @@ void activity_work_handler(struct k_work *work) {
     int32_t current = k_uptime_get();
     int32_t inactive_time = current - activity_last_uptime;
 #if IS_ENABLED(CONFIG_ZMK_SLEEP)
-   // if (inactive_time > MAX_SLEEP_MS && !is_usb_power_present()) {
-    if (inactive_time > 100000 && !is_usb_power_present()) {
-        LOG_DBG("Entering Sleep %d", MAX_SLEEP_MS);
-        // Put devices in suspend power mode before sleeping
-        set_state(ZMK_ACTIVITY_SLEEP);
+    if (zmk_activity_get_state() == ZMK_ACTIVITY_SLEEP)
+    {
+        LOG_DBG("Issuing Sleep");
         pm_power_state_force(0U, (struct pm_state_info){PM_STATE_SOFT_OFF, 0, 0});
+        return;
+    }
+   // if (inactive_time > MAX_SLEEP_MS && !is_usb_power_present()) {
+    if (inactive_time > 30000 && !is_usb_power_present()) {
+        LOG_DBG("Entering Sleep %d", MAX_SLEEP_MS);
+        set_state(ZMK_ACTIVITY_SLEEP);
     } else
 #endif /* IS_ENABLED(CONFIG_ZMK_SLEEP) MAX_IDLE_MS */ 
         if (inactive_time > 5000) {
