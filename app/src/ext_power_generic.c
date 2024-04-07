@@ -15,6 +15,7 @@
 #include <drivers/gpio.h>
 #include <drivers/ext_power.h>
 #include <zmk/activity.h>
+#include <zmk/events/activity_state_changed.h>
 #include <zmk/event_manager.h>
 
 #if DT_HAS_COMPAT_STATUS_OKAY(DT_DRV_COMPAT)
