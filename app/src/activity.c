@@ -60,7 +60,7 @@ enum zmk_activity_state zmk_activity_get_state() { return activity_state; }
 
 int activity_event_listener(const zmk_event_t *eh) {
     activity_last_uptime = k_uptime_get();
-    LOG_DBG("Activity  ", eh->event->name);
+    LOG_DBG("Activity  %s", eh->event->name);
     return set_state(ZMK_ACTIVITY_ACTIVE);
 }
 
