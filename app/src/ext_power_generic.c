@@ -219,13 +219,13 @@ static int extpower_event_listener(const zmk_event_t *eh) {
         {
            LOG_WRN("Activity Action Sleep ");
            const struct device *ext_power = device_get_binding(DT_INST_LABEL(0));
-           //ext_power_generic_disable(ext_power);
+           ext_power_generic_disable(ext_power);
         }
         if (zmk_activity_get_state() == ZMK_ACTIVITY_ACTIVE)
         {
            LOG_WRN("Activity Action Active ");
            const struct device *ext_power = device_get_binding(DT_INST_LABEL(0));
-           //ext_power_generic_enable(ext_power);
+           ext_power_generic_enable(ext_power);
         }
     }
     return 0;
