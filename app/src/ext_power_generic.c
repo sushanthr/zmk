@@ -14,6 +14,7 @@
 #include <settings/settings.h>
 #include <drivers/gpio.h>
 #include <drivers/ext_power.h>
+#include <zmk/event_manager.h>
 
 #if DT_HAS_COMPAT_STATUS_OKAY(DT_DRV_COMPAT)
 
@@ -177,6 +178,7 @@ static int ext_power_generic_init(const struct device *dev) {
 
 #ifdef CONFIG_PM_DEVICE
 static int ext_power_generic_pm_action(const struct device *dev, enum pm_device_action action) {
+    LOG_WRN("PM ACtion %d", action);
     switch (action) {
     case PM_DEVICE_ACTION_RESUME:
         ext_power_generic_enable(dev);
@@ -206,6 +208,25 @@ static struct ext_power_generic_data data = {
 static const struct ext_power_api api = {.enable = ext_power_generic_enable,
                                          .disable = ext_power_generic_disable,
                                          .get = ext_power_generic_get};
+
+// Special Power Adds
+static int extpower_event_listener(const zmk_event_t *eh) {
+
+#if IS_ENABLED(CONFIG_ZMK_BACKLIGHT_AUTO_OFF_IDLE)
+    if (as_zmk_activity_state_changed(eh)) {
+        if (zmk_activity_get_state() == ZMK_ACTIVITY_SLEEP)
+        {
+           LOG_WRN("Acitivity Action Sleep ");
+        }
+    }
+#endif
+
+    return -ENOTSUP;
+}
+
+ZMK_LISTENER(extpower, extpower_event_listener);
+ZMK_SUBSCRIPTION(extpower, zmk_activity_state_changed);
+// Special power adds END
 
 #define ZMK_EXT_POWER_INIT_PRIORITY 81
 
