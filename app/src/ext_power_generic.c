@@ -19,6 +19,7 @@
 #include <zmk/event_manager.h>
 
 #if DT_HAS_COMPAT_STATUS_OKAY(DT_DRV_COMPAT)
+#define SAVE_STATE 0
 
 #include <logging/log.h>
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
@@ -33,12 +34,12 @@ struct ext_power_generic_config {
 struct ext_power_generic_data {
     const struct device *gpio;
     bool status;
-#if IS_ENABLED(CONFIG_SETTINGS)
+#if IS_ENABLED(CONFIG_SETTINGS) && SAVE_STATE
     bool settings_init;
 #endif
 };
 
-#if IS_ENABLED(CONFIG_SETTINGS)
+#if IS_ENABLED(CONFIG_SETTINGS) && SAVE_STATE
 static void ext_power_save_state_work(struct k_work *work) {
     char setting_path[40];
     const struct device *ext_power = device_get_binding(DT_INST_LABEL(0));
@@ -52,7 +53,7 @@ static struct k_work_delayable ext_power_save_work;
 #endif
 
 int ext_power_save_state() {
-#if IS_ENABLED(CONFIG_SETTINGS)
+#if IS_ENABLED(CONFIG_SETTINGS) && SAVE_STATE
     int ret = k_work_reschedule(&ext_power_save_work, K_MSEC(CONFIG_ZMK_SETTINGS_SAVE_DEBOUNCE));
     return MIN(ret, 0);
 #else
@@ -91,7 +92,7 @@ static int ext_power_generic_get(const struct device *dev) {
     return data->status;
 }
 
-#if IS_ENABLED(CONFIG_SETTINGS)
+#if IS_ENABLED(CONFIG_SETTINGS) && SAVE_STATE
 static int ext_power_settings_set(const char *name, size_t len, settings_read_cb read_cb,
                                   void *cb_arg) {
     const char *next;
@@ -146,7 +147,7 @@ static int ext_power_generic_init(const struct device *dev) {
         return -EIO;
     }
 
-#if 0
+#if IS_ENABLED(CONFIG_SETTINGS) && SAVE_STATE
     settings_subsys_init();
 
     int err = settings_register(&ext_power_conf);
@@ -202,7 +203,7 @@ static const struct ext_power_generic_config config = {
 
 static struct ext_power_generic_data data = {
     .status = false,
-#if IS_ENABLED(CONFIG_SETTINGS)
+#if IS_ENABLED(CONFIG_SETTINGS) && SAVE_STATE
     .settings_init = false,
 #endif
 };
